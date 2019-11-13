@@ -90,19 +90,19 @@ impl RawIndexer {
             .map(|(word, indexes)| (word, SetBuf::from_dirty(indexes)))
             .collect();
 
-        let docs_words = self
-            .docs_words
-            .into_iter()
-            .map(|(id, mut words)| {
-                words.sort_unstable();
-                words.dedup();
-                (id, fst::Set::from_iter(words).unwrap())
-            })
-            .collect();
+        // let docs_words = self
+        //     .docs_words
+        //     .into_iter()
+        //     .map(|(id, mut words)| {
+        //         words.sort_unstable();
+        //         words.dedup();
+        //         (id, fst::Set::from_iter(words).unwrap())
+        //     })
+        //     .collect();
 
         Indexed {
             words_doc_indexes,
-            docs_words,
+            docs_words: HashMap::new(),
         }
     }
 }
@@ -136,7 +136,7 @@ fn index_token(
                         .entry(word.clone())
                         .or_insert_with(Vec::new)
                         .push(docindex);
-                    docs_words.entry(id).or_insert_with(Vec::new).push(word);
+                    // docs_words.entry(id).or_insert_with(Vec::new).push(word);
 
                     if !lower.contains(is_cjk) {
                         let unidecoded = deunicode_with_tofu(&lower, "");
@@ -147,7 +147,7 @@ fn index_token(
                                     .entry(word.clone())
                                     .or_insert_with(Vec::new)
                                     .push(docindex);
-                                docs_words.entry(id).or_insert_with(Vec::new).push(word);
+                                // docs_words.entry(id).or_insert_with(Vec::new).push(word);
                             }
                         }
                     }

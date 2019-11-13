@@ -377,9 +377,9 @@ pub fn write_documents_addition_index(
         postings_lists_store.put_postings_list(writer, &word, &set)?;
     }
 
-    for (id, words) in indexed.docs_words {
-        docs_words_store.put_doc_words(writer, id, &words)?;
-    }
+    // for (id, words) in indexed.docs_words {
+    //     docs_words_store.put_doc_words(writer, id, &words)?;
+    // }
 
     let delta_words = delta_words_builder
         .into_inner()

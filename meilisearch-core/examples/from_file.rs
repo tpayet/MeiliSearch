@@ -162,7 +162,6 @@ fn index_command(command: IndexCommand, database: Database) -> Result<(), Box<dy
 
             additions.update_document(document);
 
-            print!("\rindexing document {}", i);
             i += 1;
 
             if let Some(group_size) = command.update_group_size {
@@ -172,7 +171,7 @@ fn index_command(command: IndexCommand, database: Database) -> Result<(), Box<dy
             }
         }
 
-        println!();
+        println!("indexing document {}", i);
 
         let mut update_writer = db.update_write_txn().unwrap();
         println!("committing update...");
