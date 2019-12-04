@@ -1,5 +1,6 @@
 [package]
 name = "meilisearch-http"
+description = "MeiliSearch HTTP server"
 version = "0.8.4"
 license = "MIT"
 authors = [
