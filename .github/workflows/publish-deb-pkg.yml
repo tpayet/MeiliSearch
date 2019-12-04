@@ -1,0 +1,28 @@
+name: Publish binaries to GitHub release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish:
+    name: Publish debian packagge
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: hecrj/setup-rust-action@master
+      with:
+        rust-version: stable
+    - name: Install cargo-deb
+      run: cargo install cargo-deb
+    - uses: actions/checkout@v1
+    - name: Build deb package
+      run: cargo deb -p meilisearch-http
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: target/debian/*.deb
+        asset_name: meilisearch.deb
+        tag: ${{ github.ref }}
