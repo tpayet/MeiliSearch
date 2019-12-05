@@ -64,3 +64,13 @@ vergen = "3.0.4"
 
 [target.'cfg(unix)'.dependencies]
 jemallocator = "0.3.2"
+
+[package.metadata.deb]
+maintainer = "Thomas Payet <thomas@meilisearch.com>"
+section = "database"
+assets = [
+    ["target/release/meilisearch", "/usr/bin/", "755"],
+    ["../README.md", "/usr/share/doc/meilisearch/README", "644"],
+    ["../misc/systemd/meilisearch.service", "/etc/systemd/system/meilisearch.service", "644"]
+]
+

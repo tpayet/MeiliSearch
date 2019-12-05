@@ -1,0 +1,8 @@
+[Unit]
+Description=MeiliSearch, open source instant search engine
+After=systend-user-sessions.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/meilisearch
+Environment=MEILI_DB_PATH=/var/meilisearch
