@@ -26,3 +26,5 @@ jobs:
         file: target/debian/meilisearch.deb
         asset_name: meilisearch.deb
         tag: ${{ github.ref }}
+    - name: Upload to apt repository
+      run: curl -F package=@target/debian/meilisearch.deb https://${{ secrets.GEMFURY_PUSH_TOKEN }}@push.fury.io/meilisearch/
